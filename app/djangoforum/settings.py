@@ -27,7 +27,7 @@ SECRET_KEY = 'sj97+g(&3iie5ls^1tk2q4^jl6(fmt9u8_98wiphhl*_nh2!^*'
 DEBUG = os.environ.get('DEBUG', 'true') == 'true'
 
 ALLOWED_HOSTS = [
-    'localhost', '127.0.0.1',
+    'localhost', '127.0.0.1', '10.0.2.2'
 ]
 
 
