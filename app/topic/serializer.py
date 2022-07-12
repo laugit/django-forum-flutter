@@ -9,14 +9,13 @@ class TopicCreatorSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = user.models.User
-        fields = ['email', 'avatar_url', 'first_name', 'last_name', 'fullname', ]
+        fields = ['email', 'avatar_url', 'first_name', 'last_name', 'fullname', 'date_joined']
 
     def get_fullname(self, obj):
         return obj.get_fullname()
 
     def get_avatar_url(self, obj):
         return obj.get_avatar_url()
-
 
 class TopicSerializer(serializers.ModelSerializer):
     creator_serializer = TopicCreatorSerializer(source='creator', read_only=True)
@@ -40,8 +39,9 @@ class TopicSerializer(serializers.ModelSerializer):
         return None
 
     def create(self, validated_data):
-        obj = topic.models.Topic.objects.create(creator=self.context['request'].user, **validated_data)
+        obj = topic.models.Topic.objects.create(creator=self.context['request'].user if self.context['request'].user.is_authenticated else user.models.User.objects.get(pk=1), **validated_data)
         return obj
+        
 
 # TopicMessage
 class TopicMessageSerializer(serializers.ModelSerializer):
