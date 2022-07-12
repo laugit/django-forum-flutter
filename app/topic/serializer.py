@@ -30,6 +30,21 @@ class TopicCreatorUpdateSerializer(serializers.ModelSerializer):
         instance.save()
         return instance
 
+# TopicMessage
+class TopicMessageSerializer(serializers.ModelSerializer):
+    creator_serializer = TopicCreatorSerializer(source='creator', read_only=True)
+
+    class Meta:
+        model = topic.models.TopicMessage
+        fields = ['pk', 'message', 'creator_serializer', 'created_at', ]
+
+    def create(self, validated_data):
+        obj = topic.models.TopicMessage.objects.create(
+            creator=self.context['request'].user,
+            topic=topic.models.Topic.objects.get(pk=self.context['request'].parser_context.get('kwargs').get('topic_pk')),
+            **validated_data)
+        return obj
+
 class TopicSerializer(serializers.ModelSerializer):
     creator_serializer = TopicCreatorSerializer(source='creator', read_only=True)
     topicmessage_count = serializers.SerializerMethodField(read_only=True)
@@ -56,20 +71,7 @@ class TopicSerializer(serializers.ModelSerializer):
         return obj
         
 
-# TopicMessage
-class TopicMessageSerializer(serializers.ModelSerializer):
-    creator_serializer = TopicCreatorSerializer(source='creator', read_only=True)
 
-    class Meta:
-        model = topic.models.TopicMessage
-        fields = ['pk', 'message', 'creator_serializer', 'created_at', ]
-
-    def create(self, validated_data):
-        obj = topic.models.TopicMessage.objects.create(
-            creator=self.context['request'].user,
-            topic=topic.models.Topic.objects.get(pk=self.context['request'].parser_context.get('kwargs').get('topic_pk')),
-            **validated_data)
-        return obj
 
 
 class TopicRetrieveSerializer(TopicSerializer):
