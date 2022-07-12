@@ -17,6 +17,19 @@ class TopicCreatorSerializer(serializers.ModelSerializer):
     def get_avatar_url(self, obj):
         return obj.get_avatar_url()
 
+
+class TopicCreatorUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = user.models.User
+        fields = ['avatar', 'first_name', 'last_name']
+
+    def update(self, instance, validated_data):
+        instance.avatar = validated_data.get('avatar', instance.avatar)
+        instance.first_name = validated_data.get('first_name', instance.first_name)
+        instance.last_name = validated_data.get('last_name', instance.last_name)
+        instance.save()
+        return instance
+
 class TopicSerializer(serializers.ModelSerializer):
     creator_serializer = TopicCreatorSerializer(source='creator', read_only=True)
     topicmessage_count = serializers.SerializerMethodField(read_only=True)

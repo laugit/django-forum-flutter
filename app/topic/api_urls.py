@@ -10,5 +10,6 @@ urlpatterns = [
     path('topic/<int:pk>/', topic.api_views.TopicRetrieveAPIView.as_view()),
     path('topic/<int:topic_pk>/message/', topic.api_views.TopicMessageCreateAPIView.as_view()),
 
-    path('user/', topic.api_views.GetConnectedUserAPIView.as_view())
+    path('user/', topic.api_views.GetConnectedUserAPIView.as_view()),
+    path('user/<int:pk>/update/', topic.api_views.UpdateUserAPIView.as_view())
 ]

@@ -50,3 +50,7 @@ class TopicMessageCreateAPIView(generics.CreateAPIView):
 class GetConnectedUserAPIView(generics.ListAPIView):
     queryset = user.models.User.objects.filter(pk=1)
     serializer_class = topic.serializer.TopicCreatorSerializer
+
+class UpdateUserAPIView(generics.UpdateAPIView):
+    queryset = user.models.User.objects.all()
+    serializer_class = topic.serializer.TopicCreatorUpdateSerializer
