@@ -40,7 +40,7 @@ class TopicMessageSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         obj = topic.models.TopicMessage.objects.create(
-            creator=self.context['request'].user,
+            creator=self.context['request'].user if self.context['request'].user.is_authenticated else user.models.User.objects.get(pk=1),
             topic=topic.models.Topic.objects.get(pk=self.context['request'].parser_context.get('kwargs').get('topic_pk')),
             **validated_data)
         return obj
