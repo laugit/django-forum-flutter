@@ -30,6 +30,7 @@ void main() {
   );
 }
 
+// TODO mettre dans le dossier serializer
 class TopicAndCreatorModel extends ChangeNotifier {
   int pk = 0;
   Future<User> user = fetchUser();

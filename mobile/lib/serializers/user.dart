@@ -88,6 +88,7 @@ class User {
       required this.fullname,
       required this.datejoined});
 
+  // Bonne pratique get fullUrl => url + avatarUrl
   factory User.fromJson(Map<String, dynamic> json, bool update) {
     return User(
       email: json['email'],

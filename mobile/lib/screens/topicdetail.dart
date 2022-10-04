@@ -24,6 +24,7 @@ class TopicDetailScreen extends StatelessWidget {
           builder: (context, topicmodel, child) {
             return FutureBuilder<Topic>(
               future: topicmodel.topic,
+              // TODO remplacer topic par snapshot et context par _
               builder: (context, topic) {
                 if (topic.hasData) {
                   return ListView(
@@ -45,7 +46,7 @@ class TopicDetailScreen extends StatelessWidget {
                               topic.data!.description,
                               style: TextStyle(color: Colors.grey.shade600)),
                           title: "${topic.data!.creator.fullname}",
-                          trailingText:
+                          trailingText: //TODO logique redondante à sortir
                               "about ${DateTime.now().difference(DateTime.parse("${topic.data?.createdAt}")).inDays ~/ 365} days ago",
                         ),
                         const SizedBox(
@@ -76,8 +77,7 @@ class TopicDetailScreen extends StatelessWidget {
                                 })
                             : Container(
                                 padding: const EdgeInsets.only(top: 10),
-                                // ignore: prefer_const_constructors
-                                child: Text(
+                                child: const Text(
                                     "Il n'y a pas de réponses pour ce sujet."))
                       ]);
                 } else if (topic.hasError) {

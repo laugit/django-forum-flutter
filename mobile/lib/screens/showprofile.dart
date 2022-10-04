@@ -7,7 +7,6 @@ import 'package:mobile/serializers/user.dart';
 import 'package:mobile/widgets/bottombutton.dart';
 import 'package:mobile/widgets/usertopics.dart';
 import 'package:provider/provider.dart';
-import 'dart:io';
 
 import '../main.dart';
 import '../serializers/topicslist.dart';

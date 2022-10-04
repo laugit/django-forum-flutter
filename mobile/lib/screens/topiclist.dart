@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/screens/topicdetail.dart';
 import 'package:mobile/widgets/bottombutton.dart';
 import 'package:mobile/widgets/usericon.dart';
 import 'package:provider/provider.dart';
@@ -16,7 +15,7 @@ class TopicListScreen extends StatefulWidget {
 class TopicListScreenState extends State<TopicListScreen> {
   Future<TopicsList> topics = fetchTopics();
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
-      GlobalKey<RefreshIndicatorState>();
+      GlobalKey<RefreshIndicatorState>(); // Inutile
 
   @override
   Widget build(BuildContext context) {
